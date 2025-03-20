@@ -17,5 +17,21 @@ st.markdown("""
     </p>
     
 </div>
+    <div style="font-family: Arial, sans-serif; color: #333;">
+    <p>En ce qui concerne les moyennes : </p>
+    <p style="font-size: 16px; line-height: 1.6; ">
+        Les ventes en magasin montrent des moyennes élevées pour le type de café Robusta, ce qui indique une préférence des clients en magasin pour ce produit. 
+        Les ventes de Lungo et Espresso sont également significatives, tandis que les ventes de Arabica, Latte et Cappuccino sont relativement faibles.
+    </p>
+    
+    
+    <p style="font-size: 16px; line-height: 1.6;">
+        Les moyennes des ventes par canal montrent des différences dans les préférences des clients en ligne et en magasin. 
+        Les clients en ligne préfèrent les types de café Arabica et Espresso, tandis que les clients en magasin préfèrent le type de café Robusta. 
+        Les campagnes de marketing devraient être adaptées pour cibler ces préférences spécifiques afin d'optimiser les ventes.
+    </p>
+
+</div>
 
 """, unsafe_allow_html=True)
+
