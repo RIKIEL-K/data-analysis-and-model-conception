@@ -3,10 +3,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
-
+import statsmodels.api as sm
 
 
 df = pd.read_csv("BeansDataSet.csv")
+
+def scatter_plot(x, y, x_label, y_label, title):
+    fig = px.scatter(df, x=x, y=y, labels={x: x_label, y: y_label}, title=title, trendline='ols')
+    st.plotly_chart(fig)
+
+st.title("Correlations")
 
 # Encoder les catégories "Channel" et "Region" en valeurs numériques pour les corrélations
 df['Channel_Encoded'] = df['Channel'].map({'Online': 1, 'Store': 0})
@@ -15,47 +21,40 @@ df['Region_Encoded'] = df['Region'].map({'North': 0, 'Center': 1, 'South': 2})
 # Sélectionner uniquement les colonnes numériques
 df_corr = df[['Robusta', 'Arabica', 'Espresso', 'Lungo', 'Latte', 'Cappuccino', 'Channel_Encoded', 'Region_Encoded']]
 
-# Calculer la matrice de corrélation
-corr = df_corr.corr()
-
-# Affichage de la heatmap
-st.subheader("Heatmap des Corrélations")
-fig, ax = plt.subplots(figsize=(10, 6))
-sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f', ax=ax)
-plt.title("Heatmap des Corrélations entre les Ventes et les Variables")
-st.pyplot(fig)
-
-# Afficher les résultats sous forme de graphique de corrélation entre produits et zones
-st.subheader("Corrélations entre les Ventes de Produits et les Variables")
-fig, ax = plt.subplots(figsize=(10, 6))
-
-# Visualiser les relations entre les zones, canaux et ventes
-sns.scatterplot(x='Region_Encoded', y='Robusta', hue='Channel', data=df, ax=ax, palette='Set1', s=100)
-plt.title('Corrélation entre la Région et les Ventes de Robusta')
-plt.xlabel('Région')
-plt.ylabel('Ventes de Robusta')
-st.pyplot(fig)
+options = st.selectbox("Par",["Regions et Canaux","Les Cafés","Les canaux et les cafés"])
 
 
+if options == "Les Cafés":
+    # Corrélations entre les cafés
+    corr_coffee = df_corr[['Robusta', 'Arabica', 'Espresso', 'Lungo', 'Latte', 'Cappuccino']].corr()
+    st.subheader("Corrélation entre les cafés")
+    st.write(corr_coffee)
 
-# Encoder les catégories "Channel" et "Region" en valeurs numériques pour une meilleure visualisation
-df['Channel_Encoded'] = df['Channel'].map({'Online': 1, 'Store': 0})
-df['Region_Encoded'] = df['Region'].map({'South': 0, 'Center': 1, 'North': 2})
+    # Heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(corr_coffee, annot=True, cmap="coolwarm", fmt='.2f')
+    st.pyplot(plt)
 
-# Sélectionner le produit pour afficher l'histogramme
-st.subheader("Visualisation des Ventes par Produit avec un Diagramme en Points")
-product = st.selectbox("Choisissez le produit :", ['Robusta', 'Arabica', 'Espresso', 'Lungo', 'Latte', 'Cappuccino'])
+elif options == "Les canaux et les cafés":
+    # Corrélations entre les canaux et les cafés
+    corr_channel_coffee = df_corr[['Robusta', 'Arabica', 'Espresso', 'Lungo', 'Latte', 'Cappuccino', 'Channel_Encoded']].corr()[['Channel_Encoded']]
+    st.write("Corrélation entre les Canaux et les Cafés")
+    st.write(corr_channel_coffee)
 
-# Création du diagramme en points
-fig = px.scatter(
-    df,
-    x="Region_Encoded",
-    y=product,
-    color="Channel",  # Utiliser la variable 'Channel' pour colorier les points
-    hover_data=["Region", "Channel"],  # Afficher les détails au survol
-    labels={"Region_Encoded": "Région", product: f"Ventes de {product}", "Channel": "Canal"},  # Labels personnalisés
-    title=f"Diagramme en Points : Ventes de {product} selon la Région et le Canal"
-)
+    # Heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(corr_channel_coffee, annot=True, cmap="coolwarm", fmt='.2f')
+    st.pyplot(plt)
+elif options == "Regions et Canaux":
+    # Corrélations avec les régions et les canaux
+    corr_region_channel = df_corr.corr()[['Channel_Encoded', 'Region_Encoded']]
+    st.write("Corrélation avec les Régions et les Canaux")
+    st.write(corr_region_channel)
 
-# Afficher le graphique dans Streamlit
-st.plotly_chart(fig)
+    # Heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(corr_region_channel, annot=True, cmap="coolwarm", fmt='.2f')
+    st.pyplot(plt)
+
+
+

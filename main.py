@@ -38,8 +38,6 @@ st.subheader(f"Moyenne des ventes par {option}")
 # Sélectionne uniquement les colonnes numériques
 df_numeric = df[['Robusta', 'Arabica', 'Espresso', 'Lungo', 'Latte', 'Cappuccino']]
 
-
-
 # Calculer la moyenne des ventes par canal
 df_avg_channel = df.groupby('Channel')[df_numeric.columns].mean()
 
@@ -90,6 +88,50 @@ else:
     plt.xlabel('Canaux')
     plt.xticks(rotation=0)
     st.pyplot(plt)
+
+st.header("Totaux des ventes")
+
+option = st.selectbox("Par",("Région","Canal"))
+
+if option == "Canal":
+    total_coffee_by_channel = df.groupby('Channel')[df_numeric.columns].sum()
+    view = st.toggle("Voir")
+    st.dataframe(total_coffee_by_channel)
+
+
+    if view:
+        st.markdown("""
+                        <div>
+              <h3>Rapports</h3>
+             <ul>
+                <li><strong>Online :</strong>6 619 931 produits vendus</li>
+                <li><strong>Store :</strong>7 999 569 de produits vendus</li>
+              </ul>
+
+              <h4>Conclusion</h4>
+              <p>
+                    Il vend plus en magasin que en ligne.
+              </p>
+            </div>
+
+            """, unsafe_allow_html=True)
+else:
+    # Calculer le nombre total de cafés vendus par région
+    total_coffee_by_region = df.groupby('Region')[df_numeric.columns].sum()
+    view = st.toggle("Voir")
+    st.dataframe(total_coffee_by_region)
+    if view:
+        st.markdown("""
+                        <div>
+              <h3>Rapports</h3>
+             <ul>
+                <li>Au centre, sud et nord il vende plus de <strong>Robusta</strong></li>
+                <li>Au sud, il vende globalement plus de café qu'au nord et au centre</li>
+                <li>Au Cnetre, il vende globalement moins de café</li>
+              </ul>
+            </div>
+    
+            """, unsafe_allow_html=True)
 
 
 
