@@ -51,5 +51,3 @@ This project is an interactive data analysis dashboard for **Beans & Pods Inc**,
 3. Run the streamlit app:
    ```bash
    streamlit run Analyse.py
-
-This documentation provides a clear overview of your project, its features, and how to use it. Let me know if you'd like to add or modify anything!
