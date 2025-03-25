@@ -10,8 +10,8 @@ This project is an interactive data analysis dashboard for **Beans & Pods Inc**,
 
 ### 2. Sales Averages
 - Calculate and display average sales:
-  - By **Region** (e.g., North, Center, South).
-  - By **Channel** (e.g., Online, Store).
+  - By **Region** (North, Center, South).
+  - By **Channel** (Online, Store).
 - Visualize averages using bar charts.
 
 ### 3. Total Sales
@@ -37,8 +37,6 @@ This project is an interactive data analysis dashboard for **Beans & Pods Inc**,
 - Provide actionable recommendations for marketing and sales strategies.
 - Suggest additional data to collect for deeper insights.
 
-## Project Structure
-
 ## Installation
 
 1. Clone the repository:
@@ -46,8 +44,12 @@ This project is an interactive data analysis dashboard for **Beans & Pods Inc**,
    git clone <repository-url>
    cd <repository-folder>
 
-pip install -r requirements.txt
-streamlit run Analyse.py
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
 
+3. Run the streamlit app:
+   ```bash
+   streamlit run Analyse.py
 
 This documentation provides a clear overview of your project, its features, and how to use it. Let me know if you'd like to add or modify anything!
