@@ -118,8 +118,6 @@ else:
             """, unsafe_allow_html=True)
 
 
-
-
 # Sélectionner uniquement les colonnes de ventes (produits)
 product_cols = ['Robusta', 'Arabica', 'Espresso', 'Lungo', 'Latte', 'Cappuccino']
 st.subheader("Distribution des Ventes par Produit")
