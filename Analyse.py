@@ -6,22 +6,6 @@ df = pd.read_csv("BeansDataSet.csv")
 
 st.title("Analyse: Beans & Pods Inc")
 
-col1, col2, col3, col4, col5 = st.columns(5)
-
-with col1:
-    st.button("Démarrer")
-
-with col2:
-    st.button("Visualisations")
-
-with col3:
-    st.button("Directives")
-
-with col4:
-    st.button("Prédictions")
-
-with col5:
-    st.button("Conclusions")
 
 st.subheader("Echantillons de données")
 with st.form("Voir les données du formulaire"):
@@ -50,7 +34,7 @@ if option=="Région":
 
     if on:
         st.markdown("""
-                    <div>
+            <div>
           <h3>Régions avec les ventes les plus élevées et les plus basses</h3>
           <ul>
             <li><strong>Robusta :</strong> Ventes les plus élevées dans le Sud et les plus basses dans le Centre.</li>
@@ -127,7 +111,7 @@ else:
              <ul>
                 <li>Au centre, sud et nord il vende plus de <strong>Robusta</strong></li>
                 <li>Au sud, il vende globalement plus de café qu'au nord et au centre</li>
-                <li>Au Cnetre, il vende globalement moins de café</li>
+                <li>Au Centre, il vende globalement moins de café</li>
               </ul>
             </div>
     

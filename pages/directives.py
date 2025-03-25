@@ -30,7 +30,7 @@ if options == "Les Cafés":
     st.subheader("Corrélation entre les cafés")
     st.write(corr_coffee)
 
-    # Heatmap
+    
     plt.figure(figsize=(8, 6))
     sns.heatmap(corr_coffee, annot=True, cmap="coolwarm", fmt='.2f')
     st.pyplot(plt)
@@ -51,10 +51,20 @@ elif options == "Regions et Canaux":
     st.write("Corrélation avec les Régions et les Canaux")
     st.write(corr_region_channel)
 
-    # Heatmap
+    
     plt.figure(figsize=(8, 6))
     sns.heatmap(corr_region_channel, annot=True, cmap="coolwarm", fmt='.2f')
     st.pyplot(plt)
+view = st.toggle("Voir les resultats")
+
+if view :
+    st.markdown("""
+    <div>
+    <p>Il existe une corrélation entre les ventes d' Espresso et de Latte</p>
+    <p>De plus, On a egalement une corrélation entre les ventes d'Espresso et d'Arabica</p>
+</div>
+
+""", unsafe_allow_html=True)
 
 
 
