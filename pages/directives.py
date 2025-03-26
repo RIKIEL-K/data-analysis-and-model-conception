@@ -66,5 +66,3 @@ if view :
 
 """, unsafe_allow_html=True)
 
-
-

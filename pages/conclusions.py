@@ -4,6 +4,9 @@ import streamlit as st
 st.title("Conclusions")
 st.subheader("Analyse et interpretation des tendances")
 
+st.write("https://github.com/RIKIEL-K/data-analysis-and-model-conception")
+
+
 st.markdown("""
     <div>
     <p>Par le calcul des totaux par region et par canaux, on constate que: <p>
